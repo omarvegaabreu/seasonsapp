@@ -1,12 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+    //THE ONLY TIME YOU DO DIRECT ASSIGMENT TO SET STATE
+    //IS WHEN YOU FIRST CALL IT IN THE CONSTRUCTOR APP
+    this.state = { lat: null };
+
+    window.navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log(position);
+
+        //SET STATE FUNCTION IS TO UPDATE STATE
+        this.setState({ lat: position.coords.latitude });
+      },
+      err => console.log(err)
+    );
+
+    /***lat=lattitude */
+  }
+
+  render() {
+    return <div>Latitude:{this.state.lat} </div>;
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector("#root"));
