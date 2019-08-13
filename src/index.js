@@ -11,17 +11,13 @@ class App extends React.Component {
       lat: null,
       errorMessage: ""
     };
+  }
 
+  //component did mount best practice to use when getting data
+  componentDidMount() {
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        //SET STATE FUNCTION IS TO UPDATE STATE
-        this.setState({ lat: position.coords.latitude });
-      },
-      err => {
-        this.setState({
-          errorMessage: err.message
-        });
-      }
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message })
     );
   }
 
