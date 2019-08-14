@@ -1,6 +1,7 @@
 import "./SeasonDisplay.css";
 import React from "react";
 
+//helper function
 const seasonConfig = {
   winter: {
     text: "It's cold outside",
@@ -19,6 +20,8 @@ const getSeason = (lat, month) => {
     return lat > 0 ? "winter" : "summer";
   }
 };
+
+//app component
 
 const SeasonDisplay = props => {
   const season = getSeason(props.lat, new Date().getMonth());
